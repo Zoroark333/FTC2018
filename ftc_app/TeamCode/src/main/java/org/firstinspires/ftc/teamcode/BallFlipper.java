@@ -10,12 +10,12 @@ public class BallFlipper {
     Hardware robot;
     Telemetry telemetry;
 
-    public static final double SERVO_BASE_STOWED = 0.5;
-    public static final double SERVO_BASE_EXTENDED = 1;
+    public static final double SERVO_BASE_STOWED = 1;
+    public static final double SERVO_BASE_EXTENDED = 0.15;
     public static final double SERVO_FLIPPER_STOWED = 0.5;
     public static final double SERVO_FLIPPER_MID = 0.5;
-    public static final double SERVO_FLIPPER_LEFT = 0;
-    public static final double SERVO_FLIPPER_RIGHT = 1;
+    public static final double SERVO_FLIPPER_LEFT = 0.33;
+    public static final double SERVO_FLIPPER_RIGHT = 0.75;
 
     public BallFlipper(Hardware memeware, Telemetry telemetry) {
         robot = memeware;
