@@ -13,7 +13,7 @@ public class BallFlipper {
     public static final double SERVO_BASE_STOWED = 0.5;
     public static final double SERVO_BASE_EXTENDED = 1;
     public static final double SERVO_FLIPPER_STOWED = 0.5;
-    public static final double SERVO_FLIPPER_MID = 0.5;
+    public static final double SERVO_FLIPPER_MID = 0.4;
     public static final double SERVO_FLIPPER_LEFT = 0;
     public static final double SERVO_FLIPPER_RIGHT = 1;
 
