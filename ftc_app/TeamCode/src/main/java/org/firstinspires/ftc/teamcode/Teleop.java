@@ -38,6 +38,8 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+import static com.sun.tools.doclint.HtmlTag.P;
+
 /**
  * This file provides basic Telop driving for a Pushbot robot.
  * The code is structured as an Iterative OpMode
@@ -74,7 +76,7 @@ public class Teleop extends OpMode{
          */
         robot.init(hardwareMap);
         gamepad = new Gamepad();
-        drive = new XDrive(robot, telemetry);
+//        drive = new XDrive(robot, telemetry);
         ballFlipper = new BallFlipper(robot, telemetry);
 //        servoTest = new ServoTest();
 
@@ -104,22 +106,42 @@ public class Teleop extends OpMode{
     @Override
     public void loop() {
 //        servoTest.loop();
-        drive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+//        drive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
         if(gamepad1.a) {
             ballFlipper.extend();
         }
         if(gamepad1.b) {
             ballFlipper.stow();
         }
-        if(gamepad.x) {
+        if(gamepad1.x) {
             ballFlipper.flip(true);
         }
-        if(gamepad.y) {
+        if(gamepad1.y) {
             ballFlipper.flip(false);
         }
+        if(gamepad1.dpad_up) {
+            robot.ballBase.setPosition(robot.ballBase.getPosition() + 0.005);
+        }
+        if(gamepad1.dpad_down) {
+            robot.ballBase.setPosition(robot.ballBase.getPosition() - 0.005);
+        }
+        if(gamepad1.dpad_right) {
+            robot.ballFlipper.setPosition(robot.ballFlipper.getPosition() + 0.005);
+            telemetry.addLine("right");
+        }
+        if(gamepad1.dpad_left) {
+            robot.ballFlipper.setPosition(robot.ballFlipper.getPosition() - 0.005);
+            telemetry.addLine("left");
+        }
+        if(robot.ballFlipper.getPosition() < 0.15) {
+            robot.ballFlipper.setPosition(0.15);
+        }
+
 
         // Send telemetry message to signify robot running;
 //        telemetry.addData("Servo Position", "%5.2f", robot.servo.getPosition());
+        telemetry.addData("Base Position: ", "%5.2f", robot.ballBase.getPosition());
+        telemetry.addData("Flipper Position: ", "%5.2f", robot.ballFlipper.getPosition());
         telemetry.update();
     }
 
