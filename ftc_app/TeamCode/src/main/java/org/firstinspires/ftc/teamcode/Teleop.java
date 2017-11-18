@@ -68,6 +68,9 @@ public class Teleop extends OpMode{
 //    Arm arm;
 //    ServoTest servoTest;
 
+
+    Vision vision;
+
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -85,6 +88,9 @@ public class Teleop extends OpMode{
 //        arm = new Arm(robot, telemetry, gamepad1);
 
 //        servoTest.init(robot ,gamepad1, telemetry);
+
+
+        vision = new Vision(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Say", "Hello Driver");    //
@@ -130,6 +136,17 @@ public class Teleop extends OpMode{
 //        telemetry.addData("Green Level: ", robot.rightColorSensor.green());
 //        telemetry.addData("Blue Level: ", robot.rightColorSensor.blue());
 //        telemetry.addData("Arm Claw: ", "%5.2f", robot.armClaw.getPosition());
+
+
+
+
+
+
+        telemetry.addData("VuMark", "%s visible",  vision.findVuMark());
+
+
+
+
         telemetry.update();
     }
 
