@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -70,6 +71,9 @@ public class Hardware
     public Servo ballFlipper;
 
     public DigitalChannel armMinButton;
+
+//    public ColorSensor leftColorSensor;
+    public ColorSensor rightColorSensor;
 
     public static final double MID_SERVO =  0.5 ;
 

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -11,14 +12,16 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Arm {
     Hardware robot;
     Telemetry telemetry;
+    Gamepad gamepad;
 
-    public Arm(Hardware memeware, Telemetry telemetry) {
+    public Arm(Hardware memeware, Telemetry telemetry, Gamepad gamepad) {
         robot = memeware;
         this.telemetry = telemetry;
+        this.gamepad = gamepad;
 
         //Arm Motors
-        robot.armBase = robot.hwMap.dcMotor.get("armBase");
-        robot.armJoint = robot.hwMap.dcMotor.get("armJoint");
+//        robot.armBase = robot.hwMap.dcMotor.get("armBase");
+//        robot.armJoint = robot.hwMap.dcMotor.get("armJoint");
 
         // Set all motors to run with/without encoders.
         robot.armBase.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -34,5 +37,4 @@ public class Arm {
     public void control() {
 
     }
-
 }

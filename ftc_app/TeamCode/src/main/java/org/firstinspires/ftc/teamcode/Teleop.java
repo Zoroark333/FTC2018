@@ -62,8 +62,10 @@ public class Teleop extends OpMode{
     /* Declare OpMode members. */
     Hardware robot = new Hardware(); // use the class created to define a Pushbot's hardware\
     Gamepad gamepad = new Gamepad();
-    XDrive drive;
-    BallFlipper ballFlipper;
+//    XDrive drive;
+//    BallFlipper ballFlipper;
+    ColorSensor colorSensor;
+//    Arm arm;
 //    ServoTest servoTest;
 
     /*
@@ -77,8 +79,10 @@ public class Teleop extends OpMode{
         robot.init(hardwareMap);
         gamepad = new Gamepad();
 //        drive = new XDrive(robot, telemetry);
-        ballFlipper = new BallFlipper(robot, telemetry);
+//        ballFlipper = new BallFlipper(robot, telemetry, gamepad1);
 //        servoTest = new ServoTest();
+        colorSensor = new ColorSensor(robot, telemetry);
+//        arm = new Arm(robot, telemetry, gamepad1);
 
 //        servoTest.init(robot ,gamepad1, telemetry);
 
@@ -107,41 +111,25 @@ public class Teleop extends OpMode{
     public void loop() {
 //        servoTest.loop();
 //        drive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
-        if(gamepad1.a) {
-            ballFlipper.extend();
-        }
-        if(gamepad1.b) {
-            ballFlipper.stow();
-        }
-        if(gamepad1.x) {
-            ballFlipper.flip(true);
-        }
-        if(gamepad1.y) {
-            ballFlipper.flip(false);
-        }
-        if(gamepad1.dpad_up) {
-            robot.ballBase.setPosition(robot.ballBase.getPosition() + 0.005);
-        }
-        if(gamepad1.dpad_down) {
-            robot.ballBase.setPosition(robot.ballBase.getPosition() - 0.005);
-        }
-        if(gamepad1.dpad_right) {
-            robot.ballFlipper.setPosition(robot.ballFlipper.getPosition() + 0.005);
-            telemetry.addLine("right");
-        }
-        if(gamepad1.dpad_left) {
-            robot.ballFlipper.setPosition(robot.ballFlipper.getPosition() - 0.005);
-            telemetry.addLine("left");
-        }
-        if(robot.ballFlipper.getPosition() < 0.15) {
-            robot.ballFlipper.setPosition(0.15);
-        }
 
+        //flipper controls
+//        ballFlipper.loop();
 
-        // Send telemetry message to signify robot running;
+        //arm controls
+//        arm.control();
+
+        colorSensor.loop();
+
+        //telemetry
 //        telemetry.addData("Servo Position", "%5.2f", robot.servo.getPosition());
-        telemetry.addData("Base Position: ", "%5.2f", robot.ballBase.getPosition());
-        telemetry.addData("Flipper Position: ", "%5.2f", robot.ballFlipper.getPosition());
+//        telemetry.addData("Base Position: ", "%5.2f", robot.ballBase.getPosition());
+//        telemetry.addData("Flipper Position: ", "%5.2f", robot.ballFlipper.getPosition());
+//        telemetry.addData("Light Level: ", robot.rightColorSensor.alpha());
+//        telemetry.addData("Light Hue: ", robot.rightColorSensor.argb());
+//        telemetry.addData("Red Level: ", robot.rightColorSensor.red());
+//        telemetry.addData("Green Level: ", robot.rightColorSensor.green());
+//        telemetry.addData("Blue Level: ", robot.rightColorSensor.blue());
+//        telemetry.addData("Arm Claw: ", "%5.2f", robot.armClaw.getPosition());
         telemetry.update();
     }
 

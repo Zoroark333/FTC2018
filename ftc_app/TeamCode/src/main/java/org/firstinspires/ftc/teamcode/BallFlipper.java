@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.Gamepad;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /**
@@ -9,6 +11,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class BallFlipper {
     Hardware robot;
     Telemetry telemetry;
+    Gamepad gamepad;
 
     public static final double SERVO_BASE_STOWED = 1;
     public static final double SERVO_BASE_EXTENDED = 0.15;
@@ -17,9 +20,10 @@ public class BallFlipper {
     public static final double SERVO_FLIPPER_LEFT = 0.33;
     public static final double SERVO_FLIPPER_RIGHT = 0.75;
 
-    public BallFlipper(Hardware memeware, Telemetry telemetry) {
+    public BallFlipper(Hardware memeware, Telemetry telemetry, Gamepad gamepad) {
         robot = memeware;
         this.telemetry = telemetry;
+        this.gamepad = gamepad;
 
         //Ball Remover Servos
         robot.ballBase = robot.hwMap.servo.get("ballBase");
@@ -44,6 +48,27 @@ public class BallFlipper {
             moveTo(SERVO_BASE_EXTENDED, SERVO_FLIPPER_RIGHT);
         } else {
             moveTo(SERVO_BASE_EXTENDED, SERVO_FLIPPER_LEFT);
+        }
+    }
+
+    public void loop() {
+        //flipper controls
+        if(gamepad.a) {
+            extend();
+        }
+        if(gamepad.b) {
+            stow();
+        }
+        if(gamepad.x) {
+            flip(true);
+        }
+        if(gamepad.y) {
+            flip(false);
+        }
+
+        //flipper base max
+        if(robot.ballBase.getPosition() < 0.15) {
+            robot.ballBase.setPosition(0.15);
         }
     }
 }
