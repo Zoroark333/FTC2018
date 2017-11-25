@@ -93,10 +93,10 @@ public class Hardware
 
         // Define and initialize motors
         //Drive Motors
-//        leftFrontDriveMotor = hwMap.dcMotor.get("leftFrontDriveMotor");
-//        rightFrontDriveMotor = hwMap.dcMotor.get("rightFrontDriveMotor");
-//        leftRearDriveMotor = hwMap.dcMotor.get("leftRearDriveMotor");
-//        rightRearDriveMotor = hwMap.dcMotor.get("rightRearDriveMotor");
+        leftFrontDriveMotor = hwMap.dcMotor.get("leftFrontDriveMotor");
+        rightFrontDriveMotor = hwMap.dcMotor.get("rightFrontDriveMotor");
+        leftRearDriveMotor = hwMap.dcMotor.get("leftRearDriveMotor");
+        rightRearDriveMotor = hwMap.dcMotor.get("rightRearDriveMotor");
         //Arm Motors
 //        armBase = hwMap.dcMotor.get("armBase");
 //        armJoint = hwMap.dcMotor.get("armJoint");
