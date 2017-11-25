@@ -57,3 +57,5 @@ ftc_app/.idea/compiler.xml
 ftc_app/.idea/copyright/profiles_settings.xml
 ftc_app/.idea/gradle.xml
 *.xml
+
+.DS_Store

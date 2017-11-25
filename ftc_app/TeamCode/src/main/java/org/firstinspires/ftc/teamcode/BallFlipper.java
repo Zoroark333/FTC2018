@@ -53,16 +53,16 @@ public class BallFlipper {
 
     public void loop() {
         //flipper controls
-        if(gamepad.a) {
+        if(gamepad.b) {
             extend();
         }
-        if(gamepad.b) {
+        if(gamepad.x) {
             stow();
         }
-        if(gamepad.x) {
+        if(gamepad.dpad_left) {
             flip(true);
         }
-        if(gamepad.y) {
+        if(gamepad.dpad_right) {
             flip(false);
         }
 

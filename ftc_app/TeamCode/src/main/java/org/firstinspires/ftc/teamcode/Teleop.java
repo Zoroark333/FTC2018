@@ -64,8 +64,8 @@ public class Teleop extends OpMode{
     Gamepad gamepad = new Gamepad();
 //    XDrive drive;
 //    BallFlipper ballFlipper;
-    ColorSensor colorSensor;
-//    Arm arm;
+//    ColorSensor colorSensor;
+    Arm arm;
 //    ServoTest servoTest;
 
     /*
@@ -81,8 +81,8 @@ public class Teleop extends OpMode{
 //        drive = new XDrive(robot, telemetry);
 //        ballFlipper = new BallFlipper(robot, telemetry, gamepad1);
 //        servoTest = new ServoTest();
-        colorSensor = new ColorSensor(robot, telemetry);
-//        arm = new Arm(robot, telemetry, gamepad1);
+//        colorSensor = new ColorSensor(robot, telemetry);
+        arm = new Arm(robot, telemetry, gamepad1);
 
 //        servoTest.init(robot ,gamepad1, telemetry);
 
@@ -116,9 +116,9 @@ public class Teleop extends OpMode{
 //        ballFlipper.loop();
 
         //arm controls
-//        arm.control();
+        arm.control();
 
-        colorSensor.loop();
+//        colorSensor.loop();
 
         //telemetry
 //        telemetry.addData("Servo Position", "%5.2f", robot.servo.getPosition());
@@ -130,6 +130,8 @@ public class Teleop extends OpMode{
 //        telemetry.addData("Green Level: ", robot.rightColorSensor.green());
 //        telemetry.addData("Blue Level: ", robot.rightColorSensor.blue());
 //        telemetry.addData("Arm Claw: ", "%5.2f", robot.armClaw.getPosition());
+        telemetry.addData("Arm Base Position: ", robot.armBase.getCurrentPosition());
+        telemetry.addData("Arm Base Target: ", robot.armBase.getTargetPosition());
         telemetry.update();
     }
 

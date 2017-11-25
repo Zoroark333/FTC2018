@@ -14,7 +14,7 @@ public class AutonomousMode extends LinearOpMode {
     /* Declare OpMode members. */
     Hardware robot = new Hardware(); // use the class created to define a Pushbot's hardware\
     Gamepad gamepad = new Gamepad();
-    //    XDrive drive;
+//    XDrive drive;
 //    BallFlipper ballFlipper;
     ColorSensor colorSensor;
 //    Arm arm;
