@@ -29,7 +29,7 @@ public class Vision {
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
 
-        parameters.vuforiaLicenseKey = "ATsODcD/////AAAAAVw2lR...d45oGpdljdOh5LuFB9nDNfckoxb8COxKSFX";
+        parameters.vuforiaLicenseKey = "ARa90MT/////AAAAGb7390gO7UwJkV+PyPBQZdht8G6VHxOJlHE+1GCTI+Yv3vZlBCJLP3quNEiCNRcnc3jqBSJaJN/jqsHYR42i/zAmGeHzVSgZsyHZxT34Y0ZD6q0cxlE5RtwWy5fB+xTgnrVJbc6ahELytMk/gQ1gieOGzN9NraDSE6k8Bck3znVMf2q3AjeSU1yF5q3XWV78y34co1ifgjoiJ0VOefYcwNM5WHTtDWJGIsz8+21YQKRCXh0es9kj5s/zJFVKWA1+vOJXb6lQ0WA+GX4Db4/iGdFmLsXZ4aQ2VAs6s/uXuBSIulKnF55RGpdBIPXZrFdyOVRYLIg9dkrCG1mrPk/d7vi8Kobi7z3sLtYPat5Tp5t2";
 
 
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
