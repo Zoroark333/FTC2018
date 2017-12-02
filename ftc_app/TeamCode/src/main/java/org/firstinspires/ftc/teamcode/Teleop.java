@@ -82,7 +82,7 @@ public class Teleop extends OpMode{
 //        ballFlipper = new BallFlipper(robot, telemetry, gamepad1);
 //        servoTest = new ServoTest();
 //        colorSensor = new ColorSensor(robot, telemetry);
-        arm = new Arm(robot, telemetry, gamepad1);
+        arm = new Arm(robot, telemetry);
 
 //        servoTest.init(robot ,gamepad1, telemetry);
 
@@ -109,14 +109,25 @@ public class Teleop extends OpMode{
      */
     @Override
     public void loop() {
+
+        //gamepad inputs
+        float forwardBack = gamepad1.left_stick_y;
+        float leftRight = gamepad1.left_stick_x;
+        float rotation = gamepad1.right_stick_x;
+        boolean armControlUp = gamepad1.dpad_up;
+        boolean armControlDown = gamepad1.dpad_down;
+        boolean armControlClaw = gamepad1.a;
+
 //        servoTest.loop();
-//        drive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+
+        //drive controls
+//        drive.drive(fowardBack, leftRight, rotation);
 
         //flipper controls
 //        ballFlipper.loop();
 
         //arm controls
-        arm.control();
+        arm.control(armControlUp, armControlDown, armControlClaw);
 
 //        colorSensor.loop();
 
