@@ -12,7 +12,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Arm {
     Hardware robot;
     Telemetry telemetry;
-    Gamepad gamepad;
 
     boolean clawIsOpen = false;
     boolean clawButtonWasPressed = false;
@@ -22,10 +21,9 @@ public class Arm {
     public static final int BASE_INCREMENT = 3000;
     public static final int BASE_MIN = 0;
 
-    public Arm(Hardware memeware, Telemetry telemetry, Gamepad gamepad) {
+    public Arm(Hardware memeware, Telemetry telemetry) {
         robot = memeware;
         this.telemetry = telemetry;
-        this.gamepad = gamepad;
 
         //Arm Motors
         robot.armBase = robot.hwMap.dcMotor.get("armBase");
@@ -42,26 +40,27 @@ public class Arm {
 //        robot.armMinButton = robot.hwMap.digitalChannel.get("armMinButton");
     }
 
-    public void control() {
+    public void control(boolean armControlUp, boolean armControlDown, boolean armControlClaw) {
         //move arm up
-        if(gamepad.dpad_up) {
+        if(armControlUp) {
             robot.armBase.setTargetPosition(robot.armBase.getCurrentPosition() + BASE_INCREMENT);
         }
         //move arm down
-        if(gamepad.dpad_down) {
+        if(armControlDown) {
             robot.armBase.setTargetPosition(robot.armBase.getCurrentPosition() - BASE_INCREMENT);
         }
         robot.armBase.setPower(0.5);
 
+        //restriction on minimum
         if(robot.armMinButton.getState()) {
             robot.armBase.setTargetPosition(BASE_MIN);
         }
         //claw open/close
-        if(gamepad.a && !clawButtonWasPressed) {
+        if(armControlClaw && !clawButtonWasPressed) {
             clawIsOpen = !clawIsOpen;
             clawButtonWasPressed = true;
         }
-        if(!gamepad.a) {
+        if(!armControlClaw) {
             clawButtonWasPressed = false;
         }
         if(clawIsOpen) {

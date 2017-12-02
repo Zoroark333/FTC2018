@@ -22,7 +22,7 @@ public class ColorSensor {
 
 //        robot.leftColorSensor = robot.hwMap.colorSensor.get("leftColorSensor");
         robot.rightColorSensor = robot.hwMap.colorSensor.get("rightColorSensor");
-
+        
         rightHsvValues = new float[3];
     }
 
