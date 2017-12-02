@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -12,12 +14,14 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  */
 @Autonomous(name="Auto Test Drive", group="Autonomous")
 
+
+
+
 public class AutoTestDrive extends LinearOpMode {
+
 
     Hardware robot = new Hardware();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
-
-    ColorSensor colorSensor = new ColorSensor(robot, telemetry);
 
 
     static final double FORWARD_SPEED = 0.6;
@@ -34,7 +38,7 @@ public class AutoTestDrive extends LinearOpMode {
 
 
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 3.0)) {
+        while (opModeIsActive() && ) {
             robot.leftFrontDriveMotor.setPower(-FORWARD_SPEED);
             robot.rightFrontDriveMotor.setPower(FORWARD_SPEED);
             robot.leftRearDriveMotor.setPower(-FORWARD_SPEED);
