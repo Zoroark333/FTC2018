@@ -23,19 +23,13 @@ public class AutoTestDrive extends LinearOpMode {
     Hardware robot = new Hardware();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
 
-
     static final double FORWARD_SPEED = 0.6;
     static final double TURN_SPEED = 0.5;
-
-
-
 
     public void runOpMode() {
         robot.init(hardwareMap);
 
         waitForStart();
-
-
 
         runtime.reset();
         while (opModeIsActive() && ) {
