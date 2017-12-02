@@ -72,7 +72,7 @@ public class Hardware
 
     public DigitalChannel armMinButton;
 
-//    public ColorSensor leftColorSensor;
+    public ColorSensor leftColorSensor;
     public ColorSensor rightColorSensor;
 
     public static final double MID_SERVO =  0.5 ;

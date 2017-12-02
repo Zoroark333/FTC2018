@@ -29,16 +29,9 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.util.Range;
-
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
-import static com.sun.tools.doclint.HtmlTag.P;
 
 /**
  * This file provides basic Telop driving for a Pushbot robot.
@@ -64,7 +57,8 @@ public class Teleop extends OpMode{
     Gamepad gamepad = new Gamepad();
 //    XDrive drive;
 //    BallFlipper ballFlipper;
-    ColorSensor colorSensor;
+    ColourSensor leftColorSensor;
+    ColourSensor rightColorSensor;
 //    Arm arm;
 //    ServoTest servoTest;
 
@@ -81,7 +75,8 @@ public class Teleop extends OpMode{
 //        drive = new XDrive(robot, telemetry);
 //        ballFlipper = new BallFlipper(robot, telemetry, gamepad1);
 //        servoTest = new ServoTest();
-        colorSensor = new ColorSensor(robot, telemetry);
+        leftColorSensor = new ColourSensor(robot, telemetry, robot.leftColorSensor, "leftColorSensor");
+        rightColorSensor = new ColourSensor(robot, telemetry, robot.rightColorSensor, "rightColorSensor");
 //        arm = new Arm(robot, telemetry, gamepad1);
 
 //        servoTest.init(robot ,gamepad1, telemetry);
@@ -118,7 +113,7 @@ public class Teleop extends OpMode{
         //arm controls
 //        arm.control();
 
-        colorSensor.loop();
+        //color sensors
 
         //telemetry
 //        telemetry.addData("Servo Position", "%5.2f", robot.servo.getPosition());

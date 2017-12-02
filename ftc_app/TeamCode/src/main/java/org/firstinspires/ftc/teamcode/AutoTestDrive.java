@@ -16,7 +16,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 
 
-
 public class AutoTestDrive extends LinearOpMode {
 
 
@@ -32,7 +31,7 @@ public class AutoTestDrive extends LinearOpMode {
         waitForStart();
 
         runtime.reset();
-        while (opModeIsActive() && ) {
+        while (opModeIsActive()) {
             robot.leftFrontDriveMotor.setPower(-FORWARD_SPEED);
             robot.rightFrontDriveMotor.setPower(FORWARD_SPEED);
             robot.leftRearDriveMotor.setPower(-FORWARD_SPEED);
