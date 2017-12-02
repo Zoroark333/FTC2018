@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 public class AutonomousMode extends LinearOpMode {
 
     /* Declare OpMode members. */
-    Hardware robot = new Hardware(); // use the class created to define a Pushbot's hardware\
+    Hardware robot = new Hardware();
     Gamepad gamepad = new Gamepad();
     //    XDrive drive;
 //    BallFlipper ballFlipper;

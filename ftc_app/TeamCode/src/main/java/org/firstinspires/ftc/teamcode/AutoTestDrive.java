@@ -20,7 +20,7 @@ public class AutoTestDrive extends LinearOpMode {
 
     ColourSensor rightColorSensor;
 
-    Hardware robot = new Hardware();   // Use a Pushbot's hardware
+    Hardware robot = new Hardware();
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double FORWARD_SPEED = 0.6;
