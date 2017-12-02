@@ -23,21 +23,35 @@ public class AutoTestDrive extends LinearOpMode {
     Hardware robot = new Hardware();
     private ElapsedTime runtime = new ElapsedTime();
 
-    static final double FORWARD_SPEED = 0.6;
-    static final double TURN_SPEED = 0.5;
+    static final double FORWARD_SPEED = 0.1;
+    static final double TURN_SPEED = 0.1;
 
     public void runOpMode() {
         robot.init(hardwareMap);
-        rightColorSensor = new ColourSensor(robot, telemetry, robot.rightColorSensor, "rightColorSensor");
+        rightColorSensor = new ColourSensor(robot, telemetry, "rightColorSensor");
 
         waitForStart();
 
         runtime.reset();
-        while (opModeIsActive() && !rightColorSensor.isGreen()) {
-            robot.leftFrontDriveMotor.setPower(-FORWARD_SPEED);
-            robot.rightFrontDriveMotor.setPower(FORWARD_SPEED);
-            robot.leftRearDriveMotor.setPower(-FORWARD_SPEED);
-            robot.rightRearDriveMotor.setPower(FORWARD_SPEED);
+        while (opModeIsActive()) {
+            //drive forward
+            if(!rightColorSensor.isGreen()) {
+                robot.leftFrontDriveMotor.setPower(-FORWARD_SPEED);
+                robot.rightFrontDriveMotor.setPower(FORWARD_SPEED);
+                robot.leftRearDriveMotor.setPower(-FORWARD_SPEED);
+                robot.rightRearDriveMotor.setPower(FORWARD_SPEED);
+            } else {
+                robot.leftFrontDriveMotor.setPower(0);
+                robot.rightFrontDriveMotor.setPower(0);
+                robot.leftRearDriveMotor.setPower(0);
+                robot.rightRearDriveMotor.setPower(0);
+            }
+
+            telemetry.addData("isGreen: ", rightColorSensor.isGreen());
+//            telemetry.addData("Red: ", rightColorSensor.colorSensor.red());
+//            telemetry.addData("Green: ", rightColorSensor.colorSensor.green());
+//            telemetry.addData("Blue : ", rightColorSensor.colorSensor.blue());
+            telemetry.update();
         }
         sleep(1000);
     }

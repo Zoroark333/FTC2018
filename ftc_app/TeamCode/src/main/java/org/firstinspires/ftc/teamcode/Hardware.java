@@ -72,8 +72,6 @@ public class Hardware
 
     public DigitalChannel armMinButton;
 
-    public ColorSensor leftColorSensor;
-    public ColorSensor rightColorSensor;
 
     public static final double MID_SERVO =  0.5 ;
 
@@ -97,6 +95,13 @@ public class Hardware
         rightFrontDriveMotor = hwMap.dcMotor.get("rightFrontDriveMotor");
         leftRearDriveMotor = hwMap.dcMotor.get("leftRearDriveMotor");
         rightRearDriveMotor = hwMap.dcMotor.get("rightRearDriveMotor");
+
+        leftFrontDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFrontDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftRearDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightRearDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
         //Arm Motors
 //        armBase = hwMap.dcMotor.get("armBase");
 //        armJoint = hwMap.dcMotor.get("armJoint");

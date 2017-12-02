@@ -16,11 +16,9 @@ public class ColourSensor {
 
     static float[] rightHsvValues;
 
-    public ColourSensor(Hardware memeware, Telemetry telemetry, ColorSensor colorSensor, String colorSensorName) {
+    public ColourSensor(Hardware memeware, Telemetry telemetry, String colorSensorName) {
         robot = memeware;
         this.telemetry = telemetry;
-        this.colorSensor= colorSensor;
-
         colorSensor = robot.hwMap.colorSensor.get(colorSensorName);
 
 //        rightHsvValues = new float[3];
@@ -37,7 +35,7 @@ public class ColourSensor {
     }
 
     public boolean isRed() {
-        int redCutoff = colorSensor.red() - 50;
+        int redCutoff = colorSensor.red() - 10;
         if(redCutoff >= colorSensor.green() && redCutoff >= colorSensor.blue()) {
             return true;
         } else {
@@ -46,7 +44,7 @@ public class ColourSensor {
     }
 
     public boolean isGreen() {
-        int greenCutoff = colorSensor.green() - 50;
+        int greenCutoff = colorSensor.green() - 10;
         if(greenCutoff >= colorSensor.red() && greenCutoff >= colorSensor.blue()) {
             return true;
         } else {
@@ -55,7 +53,7 @@ public class ColourSensor {
     }
 
     public boolean isBlue() {
-        int blueCutoff = colorSensor.blue() - 50;
+        int blueCutoff = colorSensor.blue() - 10;
         if(blueCutoff >= colorSensor.red() && blueCutoff >= colorSensor.green()) {
             return true;
         } else {

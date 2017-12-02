@@ -27,8 +27,8 @@ public class AutonomousMode extends LinearOpMode {
 //        drive = new XDrive(robot, telemetry);
 //        ballFlipper = new BallFlipper(robot, telemetry, gamepad1);
 //        servoTest = new ServoTest();
-        leftColorSensor = new ColourSensor(robot, telemetry, robot.leftColorSensor, "leftColorSensor");
-        rightColorSensor = new ColourSensor(robot, telemetry, robot.rightColorSensor, "rightColorSensor");
+        leftColorSensor = new ColourSensor(robot, telemetry, "leftColorSensor");
+        rightColorSensor = new ColourSensor(robot, telemetry, "rightColorSensor");
 //        arm = new Arm(robot, telemetry, gamepad1);
 
         telemetry.addData("Status", "Initialized");
