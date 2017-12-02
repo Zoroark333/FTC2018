@@ -53,21 +53,21 @@ public class Arm {
         }
         robot.armBase.setPower(0.5);
 
-//        if(robot.armMinButton.getState()) {
-//            robot.armBase.setTargetPosition(BASE_MIN);
-//        }
-//        //claw open/close
-//        if(gamepad.a && !clawButtonWasPressed) {
-//            clawIsOpen = !clawIsOpen;
-//            clawButtonWasPressed = true;
-//        }
-//        if(!gamepad.a) {
-//            clawButtonWasPressed = false;
-//        }
-//        if(clawIsOpen) {
-//            robot.armClaw.setPosition(CLAW_OPEN);
-//        } else {
-//            robot.armClaw.setPosition(CLAW_CLOSED);
-//        }
+        if(robot.armMinButton.getState()) {
+            robot.armBase.setTargetPosition(BASE_MIN);
+        }
+        //claw open/close
+        if(gamepad.a && !clawButtonWasPressed) {
+            clawIsOpen = !clawIsOpen;
+            clawButtonWasPressed = true;
+        }
+        if(!gamepad.a) {
+            clawButtonWasPressed = false;
+        }
+        if(clawIsOpen) {
+            robot.armClaw.setPosition(CLAW_OPEN);
+        } else {
+            robot.armClaw.setPosition(CLAW_CLOSED);
+        }
     }
 }
