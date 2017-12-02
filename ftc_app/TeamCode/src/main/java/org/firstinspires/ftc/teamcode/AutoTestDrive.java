@@ -18,6 +18,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class AutoTestDrive extends LinearOpMode {
 
+    ColourSensor rightColorSensor;
 
     Hardware robot = new Hardware();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -27,11 +28,12 @@ public class AutoTestDrive extends LinearOpMode {
 
     public void runOpMode() {
         robot.init(hardwareMap);
+        rightColorSensor = new ColourSensor(robot, telemetry, robot.rightColorSensor, "rightColorSensor");
 
         waitForStart();
 
         runtime.reset();
-        while (opModeIsActive()) {
+        while (opModeIsActive() && !rightColorSensor.isGreen()) {
             robot.leftFrontDriveMotor.setPower(-FORWARD_SPEED);
             robot.rightFrontDriveMotor.setPower(FORWARD_SPEED);
             robot.leftRearDriveMotor.setPower(-FORWARD_SPEED);
