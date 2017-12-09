@@ -34,6 +34,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.UltrasonicSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;
@@ -70,8 +71,9 @@ public class Hardware
     public Servo ballBase;
     public Servo ballFlipper;
 
-    public DigitalChannel armMinButton;
+    UltrasonicSensor frontDistanceSensor;
 
+    public DigitalChannel armMinButton;
 
     public static final double MID_SERVO =  0.5 ;
 
@@ -101,6 +103,7 @@ public class Hardware
         leftRearDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightRearDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        frontDistanceSensor = hwMap.ultrasonicSensor.get("frontDistanceSensor");
 
         //Arm Motors
 //        armBase = hwMap.dcMotor.get("armBase");
