@@ -37,13 +37,13 @@ public class XDrive {
         robot.leftRearDriveMotor.setPower(-forwardBack - leftRight + rotation);
         robot.rightRearDriveMotor.setPower(forwardBack - leftRight + rotation);
 
-        telemetry.addData("leftFront: ", robot.leftFrontDriveMotor.getPower());
-        telemetry.addData("rightFront: ", robot.rightFrontDriveMotor.getPower());
-        telemetry.addData("leftRear: ", robot.leftRearDriveMotor.getPower());
-        telemetry.addData("rightRear: ", robot.rightRearDriveMotor.getPower());
-        telemetry.addData("forward-back stick: ", forwardBack);
-        telemetry.addData("left-right stick: ", leftRight);
-        telemetry.addData("rotation stick: ", rotation);
-        telemetry.update();
+//        telemetry.addData("leftFront: ", robot.leftFrontDriveMotor.getPower());
+//        telemetry.addData("rightFront: ", robot.rightFrontDriveMotor.getPower());
+//        telemetry.addData("leftRear: ", robot.leftRearDriveMotor.getPower());
+//        telemetry.addData("rightRear: ", robot.rightRearDriveMotor.getPower());
+//        telemetry.addData("forward-back stick: ", forwardBack);
+//        telemetry.addData("left-right stick: ", leftRight);
+//        telemetry.addData("rotation stick: ", rotation);
+//        telemetry.update();
     }
 }
