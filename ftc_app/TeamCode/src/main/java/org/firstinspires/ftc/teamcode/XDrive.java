@@ -16,19 +16,19 @@ public class XDrive {
 
 
 
-    public XDrive(Hardware memeware, Telemetry telemetry) {
-        robot = memeware;
+    public XDrive(Hardware robot, Telemetry telemetry) {
+        this.robot = robot;
         this.telemetry = telemetry;
 
         //Define Motors
-        robot.leftFrontDriveMotor = memeware.hwMap.dcMotor.get("leftFrontDriveMotor");
-        robot.rightFrontDriveMotor = memeware.hwMap.dcMotor.get("rightFrontDriveMotor");
-        robot.leftRearDriveMotor = memeware.hwMap.dcMotor.get("leftRearDriveMotor");
-        robot.rightRearDriveMotor = memeware.hwMap.dcMotor.get("rightRearDriveMotor");
+        this.robot.leftFrontDriveMotor = robot.hwMap.dcMotor.get("leftFrontDriveMotor");
+        this.robot.rightFrontDriveMotor = robot.hwMap.dcMotor.get("rightFrontDriveMotor");
+        this.robot.leftRearDriveMotor = robot.hwMap.dcMotor.get("leftRearDriveMotor");
+        this.robot.rightRearDriveMotor = robot.hwMap.dcMotor.get("rightRearDriveMotor");
 
         //Set Motor Directions
-        robot.leftRearDriveMotor.setDirection(REVERSE);
-        robot.rightRearDriveMotor.setDirection(REVERSE);
+        this.robot.leftRearDriveMotor.setDirection(REVERSE);
+        this.robot.rightRearDriveMotor.setDirection(REVERSE);
     }
 
     public void drive(Float forwardBack, Float leftRight, Float rotation) {
