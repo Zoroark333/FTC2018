@@ -32,6 +32,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareDevice;
+import com.qualcomm.robotcore.hardware.UltrasonicSensor;
 
 /**
  * This file provides basic Telop driving for a Pushbot robot.
@@ -116,6 +118,7 @@ public class Teleop extends OpMode{
         //color sensors
 
         //telemetry
+        telemetry.addData("Ultrasonic level", robot.frontDistanceSensor.getUltrasonicLevel());
 //        telemetry.addData("Servo Position", "%5.2f", robot.servo.getPosition());
 //        telemetry.addData("Base Position: ", "%5.2f", robot.ballBase.getPosition());
 //        telemetry.addData("Flipper Position: ", "%5.2f", robot.ballFlipper.getPosition());
