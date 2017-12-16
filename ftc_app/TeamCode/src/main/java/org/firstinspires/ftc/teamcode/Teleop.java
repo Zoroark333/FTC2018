@@ -29,16 +29,13 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.HardwareDevice;
+import com.qualcomm.robotcore.hardware.UltrasonicSensor;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
-import static com.sun.tools.doclint.HtmlTag.P;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /**
  * This file provides basic Telop driving for a Pushbot robot.
@@ -64,8 +61,9 @@ public class Teleop extends OpMode{
     Gamepad gamepad = new Gamepad();
 //    XDrive drive;
 //    BallFlipper ballFlipper;
-//    ColorSensor colorSensor;
-    Arm arm;
+    ColourSensor leftColorSensor;
+    ColourSensor rightColorSensor;
+//    Arm arm;
 //    ServoTest servoTest;
 
 
@@ -84,8 +82,9 @@ public class Teleop extends OpMode{
 //        drive = new XDrive(robot, telemetry);
 //        ballFlipper = new BallFlipper(robot, telemetry, gamepad1);
 //        servoTest = new ServoTest();
-//        colorSensor = new ColorSensor(robot, telemetry);
-        arm = new Arm(robot, telemetry);
+//        leftColorSensor = new ColourSensor(robot, telemetry, "leftColorSensor");
+        rightColorSensor = new ColourSensor(robot, telemetry,  "rightColorSensor");
+//        arm = new Arm(robot, telemetry, gamepad1);
 
 //        servoTest.init(robot ,gamepad1, telemetry);
 
@@ -125,9 +124,7 @@ public class Teleop extends OpMode{
         boolean armControlClaw = gamepad1.a;
 
 //        servoTest.loop();
-
-        //drive controls
-//        drive.drive(fowardBack, leftRight, rotation);
+//        drive.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
         //flipper controls
 //        ballFlipper.loop();
@@ -135,9 +132,10 @@ public class Teleop extends OpMode{
         //arm controls
         arm.control(armControlUp, armControlDown, armControlClaw);
 
-//        colorSensor.loop();
+        //color sensors
 
         //telemetry
+        telemetry.addData("Ultrasonic level", robot.frontDistanceSensor.getDistance(DistanceUnit.CM));
 //        telemetry.addData("Servo Position", "%5.2f", robot.servo.getPosition());
 //        telemetry.addData("Base Position: ", "%5.2f", robot.ballBase.getPosition());
 //        telemetry.addData("Flipper Position: ", "%5.2f", robot.ballFlipper.getPosition());

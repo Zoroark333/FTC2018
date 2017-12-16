@@ -12,11 +12,12 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 public class AutonomousMode extends LinearOpMode {
 
     /* Declare OpMode members. */
-    Hardware robot = new Hardware(); // use the class created to define a Pushbot's hardware\
+    Hardware robot = new Hardware();
     Gamepad gamepad = new Gamepad();
 //    XDrive drive;
 //    BallFlipper ballFlipper;
-    ColorSensor colorSensor;
+    ColourSensor leftColorSensor;
+    ColourSensor rightColorSensor;
 //    Arm arm;
 
     @Override
@@ -26,7 +27,8 @@ public class AutonomousMode extends LinearOpMode {
 //        drive = new XDrive(robot, telemetry);
 //        ballFlipper = new BallFlipper(robot, telemetry, gamepad1);
 //        servoTest = new ServoTest();
-        colorSensor = new ColorSensor(robot, telemetry);
+        leftColorSensor = new ColourSensor(robot, telemetry, "leftColorSensor");
+        rightColorSensor = new ColourSensor(robot, telemetry, "rightColorSensor");
 //        arm = new Arm(robot, telemetry, gamepad1);
 
         telemetry.addData("Status", "Initialized");

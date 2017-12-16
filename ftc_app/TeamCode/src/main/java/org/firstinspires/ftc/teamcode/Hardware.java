@@ -29,11 +29,13 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.UltrasonicSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;
@@ -70,10 +72,9 @@ public class Hardware
     public Servo ballBase;
     public Servo ballFlipper;
 
-    public DigitalChannel armMinButton;
+    ModernRoboticsI2cRangeSensor frontDistanceSensor;
 
-    public ColorSensor leftColorSensor;
-    public ColorSensor rightColorSensor;
+    public DigitalChannel armMinButton;
 
     public static final double MID_SERVO =  0.5 ;
 
@@ -93,10 +94,17 @@ public class Hardware
 
         // Define and initialize motors
         //Drive Motors
-//        leftFrontDriveMotor = hwMap.dcMotor.get("leftFrontDriveMotor");
-//        rightFrontDriveMotor = hwMap.dcMotor.get("rightFrontDriveMotor");
-//        leftRearDriveMotor = hwMap.dcMotor.get("leftRearDriveMotor");
-//        rightRearDriveMotor = hwMap.dcMotor.get("rightRearDriveMotor");
+        leftFrontDriveMotor = hwMap.dcMotor.get("leftFrontDriveMotor");
+        rightFrontDriveMotor = hwMap.dcMotor.get("rightFrontDriveMotor");
+        leftRearDriveMotor = hwMap.dcMotor.get("leftRearDriveMotor");
+        rightRearDriveMotor = hwMap.dcMotor.get("rightRearDriveMotor");
+
+        leftFrontDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFrontDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftRearDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightRearDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        frontDistanceSensor = hwMap.get(ModernRoboticsI2cRangeSensor.class, "frontDistanceSensor");
         //Arm Motors
 //        armBase = hwMap.dcMotor.get("armBase");
 //        armJoint = hwMap.dcMotor.get("armJoint");
