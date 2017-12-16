@@ -32,10 +32,15 @@ public class XDrive {
     }
 
     public void drive(Float forwardBack, Float leftRight, Float rotation) {
-        robot.leftFrontDriveMotor.setPower(forwardBack - leftRight - rotation);
-        robot.rightFrontDriveMotor.setPower(-forwardBack - leftRight - rotation);
-        robot.leftRearDriveMotor.setPower(-forwardBack - leftRight + rotation);
-        robot.rightRearDriveMotor.setPower(forwardBack - leftRight + rotation);
+//        robot.leftFrontDriveMotor.setPower(forwardBack - leftRight - rotation);
+//        robot.rightFrontDriveMotor.setPower(-forwardBack - leftRight - rotation);
+//        robot.leftRearDriveMotor.setPower(-forwardBack - leftRight + rotation);
+//        robot.rightRearDriveMotor.setPower(forwardBack - leftRight + rotation);
+
+        robot.leftFrontDriveMotor.setPower(-forwardBack - leftRight - rotation);
+        robot.rightFrontDriveMotor.setPower(forwardBack - leftRight - rotation);
+        robot.leftRearDriveMotor.setPower(forwardBack - leftRight + rotation);
+        robot.rightRearDriveMotor.setPower(-forwardBack - leftRight + rotation);
 
 //        telemetry.addData("leftFront: ", robot.leftFrontDriveMotor.getPower());
 //        telemetry.addData("rightFront: ", robot.rightFrontDriveMotor.getPower());

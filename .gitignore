@@ -67,3 +67,9 @@ ftc_app/build.gradle
 ftc_app/TeamCode/build.gradle
 ftc_app/gradle/wrapper/gradle-wrapper.properties
 ftc_app/FtcRobotController/build.gradle
+
+ftc_app/build.gradle
+
+ftc_app/FtcRobotController/build.gradle
+
+ftc_app/TeamCode/build.gradle

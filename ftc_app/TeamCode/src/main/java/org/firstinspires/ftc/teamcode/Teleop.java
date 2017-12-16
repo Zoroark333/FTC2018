@@ -35,6 +35,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.UltrasonicSensor;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
 /**
  * This file provides basic Telop driving for a Pushbot robot.
  * The code is structured as an Iterative OpMode
@@ -77,7 +79,7 @@ public class Teleop extends OpMode{
 //        drive = new XDrive(robot, telemetry);
 //        ballFlipper = new BallFlipper(robot, telemetry, gamepad1);
 //        servoTest = new ServoTest();
-        leftColorSensor = new ColourSensor(robot, telemetry, "leftColorSensor");
+//        leftColorSensor = new ColourSensor(robot, telemetry, "leftColorSensor");
         rightColorSensor = new ColourSensor(robot, telemetry,  "rightColorSensor");
 //        arm = new Arm(robot, telemetry, gamepad1);
 
@@ -107,7 +109,7 @@ public class Teleop extends OpMode{
     @Override
     public void loop() {
 //        servoTest.loop();
-//        drive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+//        drive.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
         //flipper controls
 //        ballFlipper.loop();
@@ -118,7 +120,7 @@ public class Teleop extends OpMode{
         //color sensors
 
         //telemetry
-        telemetry.addData("Ultrasonic level", robot.frontDistanceSensor.getUltrasonicLevel());
+        telemetry.addData("Ultrasonic level", robot.frontDistanceSensor.getDistance(DistanceUnit.CM));
 //        telemetry.addData("Servo Position", "%5.2f", robot.servo.getPosition());
 //        telemetry.addData("Base Position: ", "%5.2f", robot.ballBase.getPosition());
 //        telemetry.addData("Flipper Position: ", "%5.2f", robot.ballFlipper.getPosition());

@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
@@ -71,7 +72,7 @@ public class Hardware
     public Servo ballBase;
     public Servo ballFlipper;
 
-    UltrasonicSensor frontDistanceSensor;
+    ModernRoboticsI2cRangeSensor frontDistanceSensor;
 
     public DigitalChannel armMinButton;
 
@@ -103,8 +104,7 @@ public class Hardware
         leftRearDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightRearDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        frontDistanceSensor = hwMap.ultrasonicSensor.get("frontDistanceSensor");
-
+        frontDistanceSensor = hwMap.get(ModernRoboticsI2cRangeSensor.class, "frontDistanceSensor");
         //Arm Motors
 //        armBase = hwMap.dcMotor.get("armBase");
 //        armJoint = hwMap.dcMotor.get("armJoint");
