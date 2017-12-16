@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+import static android.os.Build.VERSION_CODES.BASE;
+
 /**
  * Created by Jonathan on 2017-10-21.
  */
@@ -13,15 +15,12 @@ public class Arm {
     Hardware robot;
     Telemetry telemetry;
 
-    boolean clawIsOpen = false;
-    boolean clawButtonWasPressed = false;
+    //min values are also default positions
+    static final int BASE_MIN = 0;
+    static final int JOINT_MIN = 0;
+    static final int CLAW_MIN = 0;
 
-    public static final double CLAW_OPEN = 1;
-    public static final double CLAW_CLOSED = 0;
-    public static final int BASE_INCREMENT = 3000;
-    public static final int BASE_MIN = 0;
-
-    public Arm(Hardware memeware, Telemetry telemetry) {
+    public Arm(Hardware memeware, Telemetry telemetry, Gamepad gamepad) {
         robot = memeware;
         this.telemetry = telemetry;
 
@@ -40,16 +39,37 @@ public class Arm {
 //        robot.armMinButton = robot.hwMap.digitalChannel.get("armMinButton");
     }
 
-    public void control(boolean armControlUp, boolean armControlDown, boolean armControlClaw) {
-        //move arm up
-        if(armControlUp) {
-            robot.armBase.setTargetPosition(robot.armBase.getCurrentPosition() + BASE_INCREMENT);
+    //set arm to default position
+    public void reset() {
+        robot.armBase.setTargetPosition(BASE_MIN);
+        robot.armJoint.setTargetPosition(JOINT_MIN);
+        robot.armClaw.setPosition(CLAW_MIN);
+    }
+
+    //full stop
+    public void stop() {
+        robot.armBase.setPower(0);
+        robot.armJoint.setPower(0);
+        robot.armClaw.setPosition(robot.armClaw.getPosition());
+    }
+
+    public void control(double basePower, double jointPower, int clawIncrement) {
+        //set motor power
+        robot.armBase.setPower(basePower);
+        robot.armJoint.setPower(jointPower);
+
+        //limit arm positions to prevent damage
+        if(robot.armMinButton.getState()) {
+            robot.armBase.setTargetPosition(BASE_MIN);
         }
-        //move arm down
-        if(armControlDown) {
-            robot.armBase.setTargetPosition(robot.armBase.getCurrentPosition() - BASE_INCREMENT);
+        if(robot.armJoint.getCurrentPosition() <= JOINT_MIN) {
+            robot.armJoint.setTargetPosition(JOINT_MIN);
         }
-        robot.armBase.setPower(0.5);
+        if(robot.armClaw.getPosition() <= CLAW_MIN) {
+            robot.armClaw.setPosition(CLAW_MIN);
+        }
+
+        //control
 
         //restriction on minimum
         if(robot.armMinButton.getState()) {
