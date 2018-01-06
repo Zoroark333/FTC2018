@@ -86,6 +86,42 @@ public class move2VuMark extends LinearOpMode{
                     telemetry.addData("rX", rX);
                     telemetry.addData("rY", rY);
                     telemetry.addData("rZ", rZ);
+                    if (tX >= 10){
+                        if (tY >= 10){
+                            telemetry.addData("whereToMove", "Up Left");
+                            drive.drive((float)0.1, (float)0.1, (float)0);
+                        } else if (tY <= -10){
+                            telemetry.addData("whereToMove", "Down Left");
+                            drive.drive((float)-0.1, (float)0.1, (float)0);
+                        } else {
+                            telemetry.addData("whereToMove", "Left");
+                            drive.drive((float)0, (float)0.1, (float)0);
+                        }
+                        }
+                    else if (tX >= -10) {
+                        if (tY >= 10) {
+                            telemetry.addData("whereToMove", "Up Right");
+                            drive.drive((float) 0.1, (float) -0.1, (float) 0);
+                        } else if (tY <= -10) {
+                            telemetry.addData("whereToMove", "Down Right");
+                            drive.drive((float) -0.1, (float) -0.1, (float) 0);
+                        } else {
+                            telemetry.addData("whereToMove", "Right");
+                            drive.drive((float) 0, (float) -0.1, (float) 0);
+                        }
+                    } else {
+                            if (tY >= 10){
+                                telemetry.addData("whereToMove", "Up");
+                                drive.drive((float)0.1, (float)0, (float)0);
+                            } else if (tY <= -10){
+                                telemetry.addData("whereToMove", "Down");
+                                drive.drive((float)-0.1, (float)0, (float)0);
+                            } else {
+                                telemetry.addData("whereToMove", "Stay");
+                                drive.drive((float) 0, (float) 0, (float) 0);
+                            }    
+                    }
+                    }
                 }
             }
             else {
