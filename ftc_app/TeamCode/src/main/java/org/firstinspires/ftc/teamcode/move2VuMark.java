@@ -45,7 +45,7 @@ public class move2VuMark extends LinearOpMode {
         VuforiaTrackable relicTemplate = relicTrackables.get(0);
         boolean a = true;
         waitForStart();
-        while (opModeIsActive() && a) {
+        while (opModeIsActive()) {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
             if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
                 vuMark = RelicRecoveryVuMark.from(relicTemplate);
@@ -120,21 +120,13 @@ public class move2VuMark extends LinearOpMode {
                         } else {
                             telemetry.addData("whereToMove", "Stay");
                             drive.drive((float) 0, (float) 0, (float) 0);
-                            wait(1000);
-                            if (tX >= 10) {
-                            } else if (tX >= -10) {
-                            } else {
-                                if (tY >= 10) {
-                                } else if (tY <= -10) {
-                                } else {
-                                    a = false;
-                                }
+                            break;
                             }
                         }
                     }
-                }
 
-            } else {
+
+                } else {
                 telemetry.addData("VuMark", "not visible");
             }
             telemetry.update();
