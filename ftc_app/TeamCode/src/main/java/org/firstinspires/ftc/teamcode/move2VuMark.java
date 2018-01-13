@@ -134,11 +134,10 @@ public class move2VuMark extends LinearOpMode {
                     }
                 }
 
-                telemetry.update();
-
             } else {
                 telemetry.addData("VuMark", "not visible");
             }
+            telemetry.update();
         }
     }
 }
