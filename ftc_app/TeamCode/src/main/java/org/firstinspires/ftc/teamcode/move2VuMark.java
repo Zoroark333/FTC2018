@@ -24,10 +24,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 
 @Autonomous(name="VisionDriveTest", group="Autonomous")
-public class move2VuMark extends LinearOpMode{
+public class move2VuMark extends LinearOpMode {
     Hardware robot = new Hardware(); // use the class created to define a Pushbot's hardware\
     Gamepad gamepad = new Gamepad();
     VuforiaLocalizer vuforia;
+
     @Override
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
@@ -44,30 +45,30 @@ public class move2VuMark extends LinearOpMode{
         VuforiaTrackable relicTemplate = relicTrackables.get(0);
         boolean a = true;
         waitForStart();
-        while (opModeIsActive()) {
-
-            /**
-             * See if any of the instances of {@link relicTemplate} are currently visible.
-             * {@link RelicRecoveryVuMark} is an enum which can have the following values:
-             * UNKNOWN, LEFT, CENTER, and RIGHT. When a VuMark is visible, something other than
-             * UNKNOWN will be returned by {@link RelicRecoveryVuMark#from(VuforiaTrackable)}.
-             */
+        while (opModeIsActive() && a) {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
             if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
+                vuMark = RelicRecoveryVuMark.from(relicTemplate);
+                /**
+                 * See if any of the instances of {@link relicTemplate} are currently visible.
+                 * {@link RelicRecoveryVuMark} is an enum which can have the following values:
+                 * UNKNOWN, LEFT, CENTER, and RIGHT. When a VuMark is visible, something other than
+                 * UNKNOWN will be returned by {@link RelicRecoveryVuMark#from(VuforiaTrackable)}.
+                 */
 
-                /* Found an instance of the template. In the actual game, you will probably
-                 * loop until this condition occurs, then move on to act accordingly depending
-                 * on which VuMark was visible. */
+                    /* Found an instance of the template. In the actual game, you will probably
+                    *   loop until this condition occurs, then move on to act accordingly depending
+                    * on which VuMark was visible. */
                 telemetry.addData("VuMark", "%s visible", vuMark);
 
-                /* For fun, we also exhibit the navigational pose. In the Relic Recovery game,
-                 * it is perhaps unlikely that you will actually need to act on this pose information, but
-                 * we illustrate it nevertheless, for completeness. */
-                OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).getPose();
+                    /* For fun, we also exhibit the navigational pose. In the Relic Recovery game,
+                    * it is perhaps unlikely that you will actually need to act on this pose information, but
+                    * we illustrate it nevertheless, for completeness. */
+                OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
                 telemetry.addData("Pose", pose);
 
-                /* We further illustrate how to decompose the pose into useful rotational and
-                 * translational components */
+                    /* We further illustrate how to decompose the pose into useful rotational and
+                    *  translational components */
                 if (pose != null) {
                     VectorF trans = pose.getTranslation();
                     Orientation rot = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
@@ -87,59 +88,57 @@ public class move2VuMark extends LinearOpMode{
                     telemetry.addData("rX", rX);
                     telemetry.addData("rY", rY);
                     telemetry.addData("rZ", rZ);
-                    while (a)
-                        if (tX >= 10){
-                            if (tY >= 10){
-                                telemetry.addData("whereToMove", "Up Left");
-                                drive.drive((float)0.1, (float)0.1, (float)0);
-                            } else if (tY <= -10){
-                                telemetry.addData("whereToMove", "Down Left");
-                                drive.drive((float)-0.1, (float)0.1, (float)0);
-                            } else {
-                                telemetry.addData("whereToMove", "Left");
-                                drive.drive((float)0, (float)0.1, (float)0);
-                            }
-                            }
-                        else if (tX >= -10) {
-                            if (tY >= 10) {
-                                telemetry.addData("whereToMove", "Up Right");
-                                drive.drive((float) 0.1, (float) -0.1, (float) 0);
-                            } else if (tY <= -10) {
-                                telemetry.addData("whereToMove", "Down Right");
-                                drive.drive((float) -0.1, (float) -0.1, (float) 0);
-                            } else {
-                                telemetry.addData("whereToMove", "Right");
-                               drive.drive((float) 0, (float) -0.1, (float) 0);
-                            }
+                    if (tX >= 10) {
+                        if (tY >= 10) {
+                            telemetry.addData("whereToMove", "Up Left");
+                            drive.drive((float) 0.1, (float) 0.1, (float) 0);
+                        } else if (tY <= -10) {
+                            telemetry.addData("whereToMove", "Down Left");
+                            drive.drive((float) -0.1, (float) 0.1, (float) 0);
                         } else {
-                            if (tY >= 10){
-                                telemetry.addData("whereToMove", "Up");
-                                drive.drive((float)0.1, (float)0, (float)0);
-                            } else if (tY <= -10){
-                                telemetry.addData("whereToMove", "Down");
-                                drive.drive((float)-0.1, (float)0, (float)0);
+                            telemetry.addData("whereToMove", "Left");
+                            drive.drive((float) 0, (float) 0.1, (float) 0);
+                        }
+                    } else if (tX >= -10) {
+                        if (tY >= 10) {
+                            telemetry.addData("whereToMove", "Up Right");
+                            drive.drive((float) 0.1, (float) -0.1, (float) 0);
+                        } else if (tY <= -10) {
+                            telemetry.addData("whereToMove", "Down Right");
+                            drive.drive((float) -0.1, (float) -0.1, (float) 0);
+                        } else {
+                            telemetry.addData("whereToMove", "Right");
+                            drive.drive((float) 0, (float) -0.1, (float) 0);
+                        }
+                    } else {
+                        if (tY >= 10) {
+                            telemetry.addData("whereToMove", "Up");
+                            drive.drive((float) 0.1, (float) 0, (float) 0);
+                        } else if (tY <= -10) {
+                            telemetry.addData("whereToMove", "Down");
+                            drive.drive((float) -0.1, (float) 0, (float) 0);
+                        } else {
+                            telemetry.addData("whereToMove", "Stay");
+                            drive.drive((float) 0, (float) 0, (float) 0);
+                            wait(1000);
+                            if (tX >= 10) {
+                            } else if (tX >= -10) {
                             } else {
-                                telemetry.addData("whereToMove", "Stay");
-                                drive.drive((float) 0, (float) 0, (float) 0);
-                                wait(1000);
-                                if (tX >= 10){
-                                } else if (tX >= -10) {
+                                if (tY >= 10) {
+                                } else if (tY <= -10) {
                                 } else {
-                                    if (tY >= 10){
-                                    } else if (tY <= -10){
-                                    } else {
-                                        a = false;
+                                    a = false;
+                                }
                             }
-                    }
+                        }
                     }
                 }
-            }
-            else {
+
+                telemetry.update();
+
+            } else {
                 telemetry.addData("VuMark", "not visible");
             }
-
-            telemetry.update();
-
         }
     }
 }
