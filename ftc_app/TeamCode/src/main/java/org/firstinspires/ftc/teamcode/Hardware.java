@@ -64,10 +64,12 @@ public class Hardware
     public DcMotor leftRearDriveMotor;
     public DcMotor rightRearDriveMotor;
 
-    public DcMotor armBase;
+    public DcMotor armBaseLeft;
+    public DcMotor armBaseRight;
     public DcMotor armJoint;
 
     public Servo armClaw;
+    public Servo armExtender;
 
     public Servo ballBase;
     public Servo ballFlipper;
@@ -106,7 +108,7 @@ public class Hardware
 
         frontDistanceSensor = hwMap.get(ModernRoboticsI2cRangeSensor.class, "frontDistanceSensor");
         //Arm Motors
-//        armBase = hwMap.dcMotor.get("armBase");
+//        armBaseLeft = hwMap.dcMotor.get("armBaseLeft");
 //        armJoint = hwMap.dcMotor.get("armJoint");
 
         // Define and initialize servos
@@ -126,7 +128,7 @@ public class Hardware
         // Set all motors to zero power
 
 //        // Set all motors to run with/without encoders.
-//        armBase.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        armBaseLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        armJoint.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
  }

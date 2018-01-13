@@ -31,14 +31,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
-<<<<<<< HEAD
-import com.qualcomm.robotcore.hardware.HardwareDevice;
-import com.qualcomm.robotcore.hardware.UltrasonicSensor;
-
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-=======
->>>>>>> Arm
 
 /**
  * This file provides basic Telop driving for a Pushbot robot.
@@ -55,22 +49,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Teleop", group="TeleOp")
+@TeleOp(name="Encoder Test", group="TeleOp")
 //@Disabled
-public class Teleop extends OpMode{
+public class EncoderTest extends OpMode{
 
     /* Declare OpMode members. */
     Hardware robot = new Hardware(); // use the class created to define a Pushbot's hardware\
     Gamepad gamepad = new Gamepad();
-//    XDrive drive;
-//    BallFlipper ballFlipper;
-    ColourSensor leftColorSensor;
-    ColourSensor rightColorSensor;
-//    Arm arm;
-//    ServoTest servoTest;
-
-
-    Vision vision;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -82,17 +67,13 @@ public class Teleop extends OpMode{
          */
         robot.init(hardwareMap);
         gamepad = new Gamepad();
-//        drive = new XDrive(robot, telemetry);
-//        ballFlipper = new BallFlipper(robot, telemetry, gamepad1);
-//        servoTest = new ServoTest();
-//        leftColorSensor = new ColourSensor(robot, telemetry, "leftColorSensor");
-        rightColorSensor = new ColourSensor(robot, telemetry,  "rightColorSensor");
-//        arm = new Arm(robot, telemetry, gamepad1);
 
-//        servoTest.init(robot ,gamepad1, telemetry);
+        robot.armBaseLeft = robot.hwMap.dcMotor.get("armBaseLeft");
+        robot.armBaseRight = robot.hwMap.dcMotor.get("armBaseRight");
+        robot.armBaseLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.armBaseRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-
-        vision = new Vision(hardwareMap);
+//        robot.hwMap.dcm
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Say", "Hello Driver");    //
@@ -110,6 +91,7 @@ public class Teleop extends OpMode{
      */
     @Override
     public void start() {
+
     }
 
     /*
@@ -117,62 +99,19 @@ public class Teleop extends OpMode{
      */
     @Override
     public void loop() {
-
-        //gamepad inputs
-        float forwardBack = gamepad1.left_stick_y;
-        float leftRight = gamepad1.left_stick_x;
-        float rotation = gamepad1.right_stick_x;
-        boolean armControlBaseUp = gamepad1.right_bumper;
-        boolean armControlBaseDown = gamepad1.left_bumper;
-        boolean armControlJointUp = gamepad1.dpad_right;
-        boolean armControlJointDown = gamepad1.dpad_left;
-        boolean armControlClaw = gamepad1.a;
-        boolean armControlExtend = gamepad1.dpad_up;
-        boolean armControlRetract = gamepad1.dpad_down;
-
-//        servoTest.loop();
-//        drive.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
-
-        //flipper controls
-//        ballFlipper.loop();
-
-        //arm controls
-        arm.control(armControlBaseUp, armControlBaseDown, armControlJointUp, armControlJointDown, armControlClaw, armControlExtend, armControlRetract);
-        //arm testing
-        if(gamepad1.dpad_right) {
-            robot.armClaw.setPosition(robot.armClaw.getPosition() + 5);
-        } else if(gamepad1.dpad_left) {
-            robot.armClaw.setPosition(robot.armClaw.getPosition() - 5);
+        if(gamepad1.dpad_up && !gamepad1.dpad_down) {
+            robot.armBaseLeft.setTargetPosition(robot.armBaseLeft.getCurrentPosition() + 50);
+        } else if(!gamepad1.dpad_up && gamepad1.dpad_down) {
+            robot.armBaseLeft.setTargetPosition(robot.armBaseLeft.getCurrentPosition() - 50);
         } else {
-            robot.armClaw.setPosition(robot.armClaw.getPosition());
+            robot.armBaseLeft.setTargetPosition(robot.armBaseLeft.getCurrentPosition());
         }
+        robot.armBaseLeft.setPower(0.5);
+        robot.armBaseRight.setPower(robot.armBaseLeft.getPower());
 
-        //color sensors
-
-        //telemetry
-        telemetry.addData("Ultrasonic level", robot.frontDistanceSensor.getDistance(DistanceUnit.CM));
-//        telemetry.addData("Servo Position", "%5.2f", robot.servo.getPosition());
-//        telemetry.addData("Base Position: ", "%5.2f", robot.ballBase.getPosition());
-//        telemetry.addData("Flipper Position: ", "%5.2f", robot.ballFlipper.getPosition());
-//        telemetry.addData("Light Level: ", robot.rightColorSensor.alpha());
-//        telemetry.addData("Light Hue: ", robot.rightColorSensor.argb());
-//        telemetry.addData("Red Level: ", robot.rightColorSensor.red());
-//        telemetry.addData("Green Level: ", robot.rightColorSensor.green());
-//        telemetry.addData("Blue Level: ", robot.rightColorSensor.blue());
-//        telemetry.addData("Arm Claw: ", "%5.2f", robot.armClaw.getPosition());
-<<<<<<< HEAD
-
-        telemetry.addData("Arm Base Position: ", robot.armBase.getCurrentPosition());
-        telemetry.addData("Arm Base Target: ", robot.armBase.getTargetPosition());
-
-        telemetry.addData("VuMark", "%s visible",  vision.findVuMark());
-
-=======
-//        telemetry.addData("Arm Base Position: ", robot.armBaseLeft.getCurrentPosition());
-//        telemetry.addData("Arm Base Target: ", robot.armBaseLeft.getTargetPosition());
-        telemetry.addData("Arm Joint Position: ", robot.armJoint.getCurrentPosition());
-        telemetry.addData("Arm Joint Target: ", robot.armJoint.getTargetPosition());
->>>>>>> Arm
+        telemetry.addData("Left motor power: ", robot.armBaseLeft.getPower());
+        telemetry.addData("Encoder Position: ", robot.armBaseLeft.getCurrentPosition());
+        telemetry.addData("Encoder Target: ", robot.armBaseLeft.getTargetPosition());
         telemetry.update();
     }
 
