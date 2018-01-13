@@ -32,13 +32,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
-<<<<<<< HEAD
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.UltrasonicSensor;
-
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-=======
->>>>>>> Arm
 
 /**
  * This file provides basic Telop driving for a Pushbot robot.
@@ -64,9 +60,9 @@ public class Teleop extends OpMode{
     Gamepad gamepad = new Gamepad();
 //    XDrive drive;
 //    BallFlipper ballFlipper;
-    ColourSensor leftColorSensor;
-    ColourSensor rightColorSensor;
-//    Arm arm;
+//    ColourSensor leftColorSensor;
+//    ColourSensor rightColorSensor;
+    Arm arm;
 //    ServoTest servoTest;
 
 
@@ -86,8 +82,8 @@ public class Teleop extends OpMode{
 //        ballFlipper = new BallFlipper(robot, telemetry, gamepad1);
 //        servoTest = new ServoTest();
 //        leftColorSensor = new ColourSensor(robot, telemetry, "leftColorSensor");
-        rightColorSensor = new ColourSensor(robot, telemetry,  "rightColorSensor");
-//        arm = new Arm(robot, telemetry, gamepad1);
+//        rightColorSensor = new ColourSensor(robot, telemetry,  "rightColorSensor");
+        arm = new Arm(robot, telemetry, gamepad1);
 
 //        servoTest.init(robot ,gamepad1, telemetry);
 
@@ -160,19 +156,11 @@ public class Teleop extends OpMode{
 //        telemetry.addData("Green Level: ", robot.rightColorSensor.green());
 //        telemetry.addData("Blue Level: ", robot.rightColorSensor.blue());
 //        telemetry.addData("Arm Claw: ", "%5.2f", robot.armClaw.getPosition());
-<<<<<<< HEAD
-
-        telemetry.addData("Arm Base Position: ", robot.armBase.getCurrentPosition());
-        telemetry.addData("Arm Base Target: ", robot.armBase.getTargetPosition());
-
-        telemetry.addData("VuMark", "%s visible",  vision.findVuMark());
-
-=======
+//        telemetry.addData("VuMark", "%s visible",  vision.findVuMark());
 //        telemetry.addData("Arm Base Position: ", robot.armBaseLeft.getCurrentPosition());
 //        telemetry.addData("Arm Base Target: ", robot.armBaseLeft.getTargetPosition());
         telemetry.addData("Arm Joint Position: ", robot.armJoint.getCurrentPosition());
         telemetry.addData("Arm Joint Target: ", robot.armJoint.getTargetPosition());
->>>>>>> Arm
         telemetry.update();
     }
 

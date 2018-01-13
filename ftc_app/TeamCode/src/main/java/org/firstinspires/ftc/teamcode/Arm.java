@@ -15,12 +15,6 @@ public class Arm {
     Hardware robot;
     Telemetry telemetry;
 
-<<<<<<< HEAD
-    //min values are also default positions
-    static final int BASE_MIN = 0;
-    static final int JOINT_MIN = 0;
-    static final int CLAW_MIN = 0;
-=======
     boolean clawIsOpen = false;
     boolean clawButtonWasPressed = false;
 
@@ -33,7 +27,6 @@ public class Arm {
     public static final double EXTENDER_INCREMENT = 0.02;
     public static final double EXTENDER_EXTENDED = 1;
     public static final double EXTENDER_RETRACTED = 0;
->>>>>>> Arm
 
     public Arm(Hardware memeware, Telemetry telemetry, Gamepad gamepad) {
         robot = memeware;
