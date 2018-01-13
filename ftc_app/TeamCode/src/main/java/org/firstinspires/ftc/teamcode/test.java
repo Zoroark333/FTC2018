@@ -42,5 +42,93 @@ public class test extends LinearOpMode {
         VuforiaTrackable relicTemplate = relicTrackables.get(0);
         boolean a = true;
         waitForStart();
+        while (opModeIsActive() && a) {
+            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+            telemetry.addData("VuMark", "%s visible", vuMark);
+            if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
+                vuMark = RelicRecoveryVuMark.from(relicTemplate);
+                /**
+                 * See if any of the instances of {@link relicTemplate} are currently visible.
+                 * {@link RelicRecoveryVuMark} is an enum which can have the following values:
+                 * UNKNOWN, LEFT, CENTER, and RIGHT. When a VuMark is visible, something other than
+                 * UNKNOWN will be returned by {@link RelicRecoveryVuMark#from(VuforiaTrackable)}.
+                 */
+
+                    /* Found an instance of the template. In the actual game, you will probably
+                    *   loop until this condition occurs, then move on to act accordingly depending
+                    * on which VuMark was visible. */
+
+                    /* For fun, we also exhibit the navigational pose. In the Relic Recovery game,
+                    * it is perhaps unlikely that you will actually need to act on this pose information, but
+                    * we illustrate it nevertheless, for completeness. */
+                OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
+                telemetry.addData("Pose", pose);
+                if (pose != null) {
+                    VectorF trans = pose.getTranslation();
+                    Orientation rot = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
+
+                    // Extract the X, Y, and Z components of the offset of the target relative to the robot
+                    double tX = trans.get(0);
+                    double tY = trans.get(1);
+                    double tZ = trans.get(2);
+
+                    // Extract the rotational components of the target relative to the robot
+                    double rX = rot.firstAngle;
+                    double rY = rot.secondAngle;
+                    double rZ = rot.thirdAngle;
+                    telemetry.addData("tX", tX);
+                    telemetry.addData("tY", tY);
+                    telemetry.addData("tZ", tZ);
+                    telemetry.addData("rX", rX);
+                    telemetry.addData("rY", rY);
+                    telemetry.addData("rZ", rZ);
+                    if (tX >= 10) {
+                        if (tY >= 10) {
+                            telemetry.addData("whereToMove", "Up Left");
+                            drive.drive((float) 0.1, (float) 0.1, (float) 0);
+                        } else if (tY <= -10) {
+                            telemetry.addData("whereToMove", "Down Left");
+                            drive.drive((float) -0.1, (float) 0.1, (float) 0);
+                        } else {
+                            telemetry.addData("whereToMove", "Left");
+                            drive.drive((float) 0, (float) 0.1, (float) 0);
+                        }
+                    } else if (tX >= -10) {
+                        if (tY >= 10) {
+                            telemetry.addData("whereToMove", "Up Right");
+                            drive.drive((float) 0.1, (float) -0.1, (float) 0);
+                        } else if (tY <= -10) {
+                            telemetry.addData("whereToMove", "Down Right");
+                            drive.drive((float) -0.1, (float) -0.1, (float) 0);
+                        } else {
+                            telemetry.addData("whereToMove", "Right");
+                            drive.drive((float) 0, (float) -0.1, (float) 0);
+                        }
+                    } else {
+                        if (tY >= 10) {
+                            telemetry.addData("whereToMove", "Up");
+                            drive.drive((float) 0.1, (float) 0, (float) 0);
+                        } else if (tY <= -10) {
+                            telemetry.addData("whereToMove", "Down");
+                            drive.drive((float) -0.1, (float) 0, (float) 0);
+                        } else {
+                            telemetry.addData("whereToMove", "Stay");
+                            drive.drive((float) 0, (float) 0, (float) 0);
+                            wait(1000);
+                            if (tX >= 10) {
+                            } else if (tX >= -10) {
+                            } else {
+                                if (tY >= 10) {
+                                } else if (tY <= -10) {
+                                } else {
+                                    a = false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            telemetry.update();
+        }
     }
 }
